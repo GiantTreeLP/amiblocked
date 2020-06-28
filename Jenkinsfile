@@ -6,11 +6,12 @@ pipeline {
     }
   }
   options {
-     buildDiscarder logRotator(numToKeepStr: '25')
+     buildDiscarder logRotator(numToKeepStr: '10')
   }
   stages {
     stage('Install') {
       steps {
+        sh 'id'
         sh 'flutter pub get'
       }
     }
