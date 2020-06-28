@@ -3,13 +3,15 @@ pipeline {
     docker {
       label 'docker'
       image 'cirrusci/flutter:beta'
-      args '--workdir /build'
     }
   }
   options {
      buildDiscarder logRotator(numToKeepStr: '10')
   }
   stages {
+    stage('Prepare') {
+      sh 'sudo chown 1003:1003 -R /home/cirrus'
+    }
     stage('Install') {
       steps {
         sh 'id'
