@@ -3,6 +3,7 @@ pipeline {
     docker {
       label 'docker'
       image 'cirrusci/flutter:beta'
+      args '-u root:root'
     }
   }
   options {
