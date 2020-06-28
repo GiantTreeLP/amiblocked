@@ -13,6 +13,9 @@ pipeline {
     stage('Install') {
       steps {
         sh 'id'
+        sh 'flutter channel beta'
+        sh 'flutter upgrade'
+        sh 'flutter config --enable-web'
         sh 'flutter pub get'
       }
     }
