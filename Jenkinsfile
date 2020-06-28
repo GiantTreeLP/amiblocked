@@ -10,7 +10,9 @@ pipeline {
   }
   stages {
     stage('Prepare') {
-      sh 'sudo chown 1003:1003 -R /home/cirrus'
+      steps {
+        sh 'sudo chown 1003:1003 -R /home/cirrus'
+      }
     }
     stage('Install') {
       steps {
