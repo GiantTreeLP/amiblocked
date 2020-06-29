@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Am I blocked?',
       theme: ThemeData(
         primarySwatch: Colors.green,
         primaryColor: Colors.green,
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     if (input.isNotEmpty) {
       _debounce = Timer(const Duration(milliseconds: 500), () async {
-        final response = await post("//127.0.0.1:8080/api/v1/find", body: {"search": input});
+        final response = await post("/api/v1/find", body: {"search": input});
         final result = parseResult(response.statusCode == httpSuccess
             ? response.body
             : emptyResponse);

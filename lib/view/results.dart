@@ -23,7 +23,7 @@ class ResultCards extends StatelessWidget {
     } else if (this.result != null) {
       if (this.result.blocked == true) {
         child = Placeholder(color: Colors.red.shade900);
-      } else if (this.result.note != null) {
+      } else if (this.result.note.isEmpty) {
         child = Placeholder(color: Colors.yellow.shade900);
       } else {
         child = Placeholder(color: Colors.green.shade900);

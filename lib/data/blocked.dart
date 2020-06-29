@@ -21,7 +21,7 @@ class BlockedResult {
 }
 
 BlockedResult parseResult(String response) {
-  final parsed = json.decode(response)?.cast<Map<String, dynamic>>();
+  final parsed = json.decode(response);
   if (parsed != null) {
     return BlockedResult.fromJson(parsed);
   } else {
