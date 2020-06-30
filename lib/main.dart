@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
               child: Text(
                 'Search for your username or Discord ID:',
-                style: Theme.of(context).textTheme.subtitle1,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             Container(
