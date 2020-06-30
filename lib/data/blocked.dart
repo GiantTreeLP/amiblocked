@@ -12,11 +12,13 @@ class BlockedResult {
 
   factory BlockedResult.fromJson(Map<String, dynamic> json) {
     return BlockedResult(
-        username: json["username"],
-        snowflake: json["snowflake"],
-        note: json["note"],
-        blocked: json["blocked"],
-        blockedAt: json["blockedAt"]);
+      username: json["username"],
+      snowflake: json["snowflake"],
+      note: json["note"],
+      blocked: json["blocked"],
+      blockedAt:
+          DateTime.fromMillisecondsSinceEpoch(json["blockedAt"], isUtc: true),
+    );
   }
 }
 
