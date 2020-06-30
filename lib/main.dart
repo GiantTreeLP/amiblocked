@@ -109,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 512.0,
               child: TextFormField(
+                autofocus: true,
                 onChanged: _onSearchChanged,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
