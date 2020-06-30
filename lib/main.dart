@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _searchString;
 
   void _onSearchChanged(String input) {
+    input = input.trim();
     if (_debounce?.isActive ?? false) {
       _debounce.cancel();
     }
