@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onChanged: _onSearchChanged,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Name',
+                  labelText: 'Username or Discord ID',
                 ),
               ),
             ),
