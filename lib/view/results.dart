@@ -1,15 +1,17 @@
 import 'package:amiblocked/data/blocked.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ResultCards extends StatelessWidget {
   final BlockedResult result;
   final String search;
   final bool searching;
 
-  ResultCards({Key key,
-    @required this.result,
-    @required this.search,
-    @required this.searching})
+  ResultCards(
+      {Key key,
+      @required this.result,
+      @required this.search,
+      @required this.searching})
       : super(key: key);
 
   @override
@@ -21,14 +23,124 @@ class ResultCards extends StatelessWidget {
         value: null,
       );
     } else if (this.result != null) {
+      final cardConstraints = BoxConstraints(
+        minWidth: 480,
+        maxWidth: 720,
+        minHeight: 120,
+      );
+      final padding = EdgeInsets.all(16.0);
       if (this.result.blocked == true) {
-        child = Placeholder(color: Colors.red.shade900);
-      } else if (this.result.note.isEmpty) {
-        child = Placeholder(color: Colors.yellow.shade900);
+        child = Card(
+          color: Colors.red.shade900,
+          child: Container(
+            constraints: cardConstraints,
+            padding: padding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Found you: ${result.username} (${result.snowflake})",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Text(
+                  "You are blocked!",
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Divider(),
+                Text(
+                  "Blocked at: ${DateFormat.yMMMMd().add_jms().format(result.blockedAt)}",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                if (this.result.note.isNotEmpty)
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Note attached: ",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Text(
+                          result.note,
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        )
+                      ],
+                    ),
+                  )
+                else
+                  Text(
+                    "No note attached!",
+                    style: Theme.of(context).textTheme.headline6,
+                  )
+              ],
+            ),
+          ),
+        );
+      } else if (this.result.note.isNotEmpty) {
+        child = Card(
+          color: Colors.yellow.shade900,
+          child: Container(
+            constraints: cardConstraints,
+            padding: padding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Found you: ${result.username} (${result.snowflake})",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Text(
+                  "You are not blocked, but you have a note attached to you!",
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Divider(),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "Note attached: ",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      Text(
+                        result.note,
+                        textAlign: TextAlign.start,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       } else {
-        child = Placeholder(color: Colors.green.shade900);
+        child = Card(
+          color: Colors.green.shade900,
+          child: Container(
+            constraints: cardConstraints,
+            padding: padding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "I can't find you: ${result.username} (${result.snowflake})",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Divider(),
+                Text(
+                  "You are not blocked and you have no note attached to you!",
+                  style: Theme.of(context).textTheme.headline5,
+                )
+              ],
+            ),
+          ),
+        );
       }
-    } else if(this.search?.isNotEmpty ?? false) {
+    } else if (this.search?.isNotEmpty ?? false) {
       child = Text(
         "No result for $search.",
         style: Theme.of(context).textTheme.headline5,
