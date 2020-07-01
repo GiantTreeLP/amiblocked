@@ -19,16 +19,16 @@ class ResultCards extends StatelessWidget {
     Widget child;
 
     if (searching) {
-      child = CircularProgressIndicator(
+      child = const CircularProgressIndicator(
         value: null,
       );
     } else if (this.result != null) {
-      final cardConstraints = BoxConstraints(
+      const cardConstraints = const BoxConstraints(
         minWidth: 480,
         maxWidth: 720,
         minHeight: 120,
       );
-      final padding = EdgeInsets.all(16.0);
+      const padding = const EdgeInsets.all(16.0);
       if (this.result.blocked == true) {
         child = Card(
           color: Colors.red.shade900,
@@ -53,7 +53,7 @@ class ResultCards extends StatelessWidget {
                 ),
                 if (this.result.note.isNotEmpty)
                   Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: const EdgeInsets.only(top: 8.0),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -95,9 +95,9 @@ class ResultCards extends StatelessWidget {
                   "You are not blocked, but you have a note attached to you!",
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                Divider(),
+                const Divider(),
                 Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 8.0),
                   child: Column(
                     children: <Widget>[
                       Text(
@@ -130,7 +130,7 @@ class ResultCards extends StatelessWidget {
                   "I can't find you: ${result.username} (${result.snowflake})",
                   style: Theme.of(context).textTheme.headline4,
                 ),
-                Divider(),
+                const Divider(),
                 Text(
                   "You are not blocked and you have no note attached to you!",
                   style: Theme.of(context).textTheme.headline5,
@@ -153,7 +153,7 @@ class ResultCards extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
       child: child,
     );
   }

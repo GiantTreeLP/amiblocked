@@ -58,9 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _debounce = Timer(const Duration(milliseconds: 500), () async {
         await initializeDateFormatting(await findSystemLocale(), null);
         final response = await post("/api/v1/find", body: {"search": input});
-        final result = parseResult(response.statusCode == httpSuccess
-            ? response.body
-            : emptyResponse);
+        final result = parseResult(
+            response.statusCode == httpSuccess ? response.body : emptyResponse);
         setState(() {
           _response = result;
           _searchString = input;
@@ -86,47 +85,53 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                "Figure out whether or not you are blocked by me!",
-                style: Theme.of(context).textTheme.headline3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-              child: Text(
-                'Search for your username or Discord ID:',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ),
-            Container(
-              width: 512.0,
-              child: TextFormField(
-                autofocus: true,
-                onChanged: _onSearchChanged,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Username or Discord ID',
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) =>
+            SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "Figure out whether or not you are blocked by me!",
+                    style: Theme.of(context).textTheme.headline3,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Search for your username or Discord ID:',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ),
+                Container(
+                  width: 512.0,
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextFormField(
+                    autofocus: true,
+                    onChanged: _onSearchChanged,
+                    decoration: const InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: 'Username or Discord ID',
+                    ),
+                  ),
+                ),
+                ResultCards(
+                  result: _response,
+                  search: _searchString,
+                  searching: _debounce?.isActive ?? false,
+                ),
+              ],
             ),
-            ResultCards(
-              result: _response,
-              search: _searchString,
-              searching: _debounce?.isActive ?? false,
-            ),
-          ],
+          ),
         ),
       ),
     );
