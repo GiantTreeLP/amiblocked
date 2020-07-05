@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _debounce.cancel();
     }
     if (input.isNotEmpty) {
-      _debounce = Timer(const Duration(milliseconds: 500), () async {
+      _debounce = Timer(const Duration(milliseconds: 400), () async {
         await initializeDateFormatting(await findSystemLocale(), null);
         final response = await post("/api/v1/find", body: {"search": input});
         final result = parseResult(
