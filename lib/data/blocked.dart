@@ -5,10 +5,9 @@ class BlockedResult {
   final String snowflake;
   final String note;
   final bool blocked;
-  final DateTime blockedAt;
 
   BlockedResult(
-      {this.username, this.snowflake, this.note, this.blocked, this.blockedAt});
+      {this.username, this.snowflake, this.note, this.blocked});
 
   factory BlockedResult.fromJson(Map<String, dynamic> json) {
     return BlockedResult(
@@ -16,8 +15,6 @@ class BlockedResult {
       snowflake: json["snowflake"],
       note: json["note"],
       blocked: json["blocked"],
-      blockedAt:
-          DateTime.fromMillisecondsSinceEpoch(json["blockedAt"], isUtc: true),
     );
   }
 }

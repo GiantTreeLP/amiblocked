@@ -47,10 +47,6 @@ class ResultCards extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 Divider(),
-                Text(
-                  "Blocked at: ${DateFormat.yMMMMd().add_jms().format(result.blockedAt)}",
-                  style: Theme.of(context).textTheme.headline6,
-                ),
                 if (this.result.note.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
