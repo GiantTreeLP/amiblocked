@@ -1,6 +1,5 @@
 import 'package:amiblocked/data/blocked.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ResultCards extends StatelessWidget {
   final BlockedResult result;

@@ -6,8 +6,6 @@ import 'package:amiblocked/view/results.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl_browser.dart';
 
 const httpSuccess = 200;
 const emptyResponse = 'null';
@@ -56,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     if (input.isNotEmpty) {
       _debounce = Timer(const Duration(milliseconds: 400), () async {
-        await initializeDateFormatting(await findSystemLocale(), null);
         final response = await post("/api/v1/find", body: {"search": input});
         final result = parseResult(
             response.statusCode == httpSuccess ? response.body : emptyResponse);
